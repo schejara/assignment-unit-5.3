@@ -14,21 +14,19 @@ let myCollection = [];
 //Take in the album's title, artist, yearPublished as parameters.
 //Create a new object having the above properties.
 //NOTE: Your object's properties must have title, artist, and yearPublished in order
-,// for this assignment's automated tests to work correctly!
+// for this assignment's automated tests to work correctly!
 //Add the new object to the end of the collection array.
 //return the newly created object.
 
- function addToCollection(collection,title,artist,yearPublished ){
+ function addToCollection(collection,title,artist,yearPublished){
  obj = {
   title : title,
   artist : artist,
   yearPublished : yearPublished,
-  
  };
- obj.Track = [
-    { name: 'Cheap Thrills', duration: '2:45'},
-    
- ]
+
+ 
+ 
   
  
 collection.push(obj);
@@ -115,30 +113,32 @@ console.log('My array is now ',artistArray);
 // return all albums from the collection being searched.
 
 
-function search(collection,artist,yearPublished){
+function search(collection,searchCriteria){
    foundArray = [];
-     if(artist === undefined && yearPublished === undefined)
-    {
-    
-      return collection;
-    }
+   let gotAny = false;        
+  
+   
  
+  
   for(let i =0; i < collection.length ; i++){
-    if(collection[i].artist === artist && collection[i].yearPublished === yearPublished){
+    if(collection[i].artist === searchCriteria.artist && collection[i].yearPublished === searchCriteria.yearPublished){
           foundArray.push(collection[i]);
-          
-    
+          gotAny = true;   
   }
+}
+if(gotAny !== true){
+  return collection;
 }
 return foundArray;
 }
 
-console.log('Find result in collection ',search(myCollection,));
+console.log('Find result in collection ',search(myCollection,{artist : 'Sia',yearPublished : 2023}));
 console.log('My new found array value is ',foundArray);
 
 
+
 /*Add an array of tracks to each of your album objects. Each track should have a name and duration.
- You will need to update the functions to support this n  ew property:
+ You will need to update the functions to support this new property:
 //Update the addToCollection function to also take an input parameter for the array of tracks.
 //Update the showCollection function to display the list of tracks for each album with its name and duration.
 //TITLE by ARTIST, published in YEARPUBLISHED:
