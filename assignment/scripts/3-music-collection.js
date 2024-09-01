@@ -17,25 +17,57 @@ let myCollection = [];
 // for this assignment's automated tests to work correctly!
 //Add the new object to the end of the collection array.
 //return the newly created object.
+let cheapThrillsTrack = [
+  { name : 'cheapThrillsTrack1',duration : '2:45'},
+  { name : 'cheapThrillsTrack2',duration : '3:45'}
+ ];
 
- function addToCollection(collection,title,artist,yearPublished){
+
+ let  lillyTrack = [
+  {name : 'LillyTrack1',duration : '3:50'},
+  {name : 'LillyTrack1',duration : '4:50'}
+ ]
+
+ let  FlowersTrack = [
+  {name : 'FlowersTrack1',duration : '3:50'},
+  {name : 'FlowersTrack2',duration : '4:50'}
+ ];
+
+ let cruelSummerTrack = [
+  { name : 'cruelSummerTrack1',duration : '2:45'},
+  { name : 'cruelSummerTrack2',duration : '3:45'}
+ ];
+
+
+ let  roarTrack = [
+  {name : 'roarTrack1',duration : '3:50'},
+  {name : 'roarTrack1',duration : '4:50'}
+ ]
+
+ let  wakaWakaTrack = [
+  {name : 'wakaWakaTrack1',duration : '3:50'},
+  {name : 'wakaWakaTrack2',duration : '4:50'}
+ ];
+
+ let  fadedTrack = [
+  {name : 'fadedTrack1',duration : '3:50'},
+  {name : 'adedTrack2',duration : '4:50'}
+ ];
+
+
+ function addToCollection(collection,title,artist,yearPublished,track = []){
+  
  obj = {
   title : title,
   artist : artist,
   yearPublished : yearPublished,
- };
-
+  track : track
+}; 
  
- 
-  
- 
-collection.push(obj);
- 
+collection.push(obj); 
  return obj;
- 
-
  }
- console.log('Added in my collection ',addToCollection(myCollection,'cheap Thrills','Sia',2023))
+ console.log('Added in my collection ',addToCollection(myCollection,'cheap Thrills','Sia',2023,cheapThrillsTrack))
 console.log('My collection is ',myCollection);
 
 
@@ -46,13 +78,12 @@ console.log('My collection is ',myCollection);
 //console.log each album as added using the function's returned value.
 //After all are added, console.log the myCollection array.
 
-console.log('Added in my collection ',addToCollection(myCollection,'Lilly','Alan Walker',2018));
-console.log('Added in my collection ',addToCollection(myCollection,'Flowers','miley Cyrous',2023));
-console.log('Added in my collection ',addToCollection(myCollection,'Cruel Summer','Taylor Swift',2019));
-console.log('Added in my collection ',addToCollection(myCollection,'Roar','Katy Perry',2013));
-console.log('Added in my collection ',addToCollection(myCollection,'Waka waka','Shakira',2010));
-console.log('Added in my collection ',addToCollection(myCollection,'Faded','Alan Walker',2015));
-console.log('Added in my collection ',addToCollection(myCollection,'Lilly','Alan Walker',2018));
+console.log('Added in my collection ',addToCollection(myCollection,'Lilly','Alan Walker',2018, lillyTrack));
+console.log('Added in my collection ',addToCollection(myCollection,'Flowers','miley Cyrous',2023,FlowersTrack));
+console.log('Added in my collection ',addToCollection(myCollection,'Cruel Summer','Taylor Swift',2019, cruelSummerTrack));
+console.log('Added in my collection ',addToCollection(myCollection,'Roar','Katy Perry',2013, roarTrack));
+console.log('Added in my collection ',addToCollection(myCollection,'Waka waka','Shakira',2010, wakaWakaTrack));
+console.log('Added in my collection ',addToCollection(myCollection,'Faded','Alan Walker',2015, fadedTrack));
 
 console.log('My collection is ',myCollection);
 
@@ -64,13 +95,25 @@ console.log('My collection is ',myCollection);
 //Test the showCollection function.
 
 function showCollection(collection){
-  for(let i = 0; i < collection.length; i++){
-  
-  console.log(collection[i].title+ ' by ' + collection[i].artist + ' Published in ' + collection[i].yearPublished);
-  }  
 
-}
-showCollection(myCollection);  
+  for(let i = 0; i < collection.length; i++){
+    console.log(collection[i].title+ ' by ' + collection[i].artist + ', published in ' +
+      collection[i].yearPublished) + ' : ';
+
+      // for displaying tracks for each album
+
+   
+/*for(let j = 0; j < collection[i].track.length; j++){
+console.log('  Track: ' + collection[i].track[j].name + ' - ' + collection[i].track[j].duration);
+
+};*/
+// end displaying tracks for each album
+    }
+    }
+     
+
+
+showCollection(myCollection );  
 
 
 //Add a function named findByArtist. This function should:
@@ -97,7 +140,7 @@ for(let i =0; i < collection.length; i++){
 return artistArray;
 }
 console.log('find artist value is now ',findByArtist(myCollection,'Alan Walker'));
-console.log('My array is now ',artistArray);
+console.log('My artistArray is now ',artistArray);
 
 //Stretch Goal
 
@@ -112,28 +155,30 @@ console.log('My array is now ',artistArray);
 //If there is no search object, an empty search object, or missing artist/yearPublished data provided as input,
 // return all albums from the collection being searched.
 
+let searchCriteria1 = {artist:'Sia', yearPublished:2023};
+console.log('FINAL SEARCH', search(myCollection, searchCriteria1));
 
-function search(collection,searchCriteria){
-   foundArray = [];
-   let gotAny = false;        
-  
-   
- 
-  
-  for(let i =0; i < collection.length ; i++){
-    if(collection[i].artist === searchCriteria.artist && collection[i].yearPublished === searchCriteria.yearPublished){
-          foundArray.push(collection[i]);
-          gotAny = true;   
+function search(collection1, searchCriteria){
+  let searchArray = [];
+  if(!searchCriteria || searchCriteria.artist === null || searchCriteria.artist === undefined|| searchCriteria.yearPublished === null|| searchCriteria.yearPublished === undefined){
+    console.log('Missing Search criteria parameters')
+    return collection1;
+  }
+
+  for (i=0; i<collection1.length; i++){
+    if (collection1[i].artist === searchCriteria.artist && collection1[i].yearPublished ===searchCriteria.yearPublished)
+    {
+    console.log ('Search found record');
+    searchArray.push(collection1[i]);
+    }
+
+    if (searchArray.length === 0){
+      console.log('No matching search record found');
+      return searchArray;
+    }
+    return searchArray;
   }
 }
-if(gotAny !== true){
-  return collection;
-}
-return foundArray;
-}
-
-console.log('Find result in collection ',search(myCollection,{artist : 'Sia',yearPublished : 2023}));
-console.log('My new found array value is ',foundArray);
 
 
 
